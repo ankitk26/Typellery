@@ -1,5 +1,4 @@
 import { Box, createStyles, makeStyles, Theme } from "@material-ui/core";
-import React from "react";
 import ImageStats from "./ImageStats";
 import UserHeader from "./UserHeader";
 
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ImageInfoHeader: React.FC = () => {
+export default function ImageInfoHeader() {
   const classes = useStyles();
 
   return (
@@ -30,6 +29,4 @@ const ImageInfoHeader: React.FC = () => {
       <ImageStats />
     </Box>
   );
-};
-
-export default ImageInfoHeader;
+}

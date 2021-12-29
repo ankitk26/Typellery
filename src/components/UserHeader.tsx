@@ -6,9 +6,8 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,10 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const UserHeader: React.FC = () => {
+export default function UserHeader() {
   const classes = useStyles();
 
-  const { current } = useContext(ImageContext) as ImageContextInterface;
+  const { current } = useImage();
 
   return (
     <Link to={{ pathname: current?.user.links.html }} target="_blank">
@@ -39,6 +38,4 @@ const UserHeader: React.FC = () => {
       </Box>
     </Link>
   );
-};
-
-export default UserHeader;
+}

@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import Masonry from "react-masonry-css";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 import ImageItem from "./ImageItem";
 
-const ImagesGrid: React.FC = () => {
-  const { images } = useContext(ImageContext) as ImageContextInterface;
+export default function ImagesGrid() {
+  const { images } = useImage();
 
   const breakpoints = {
     default: 3,
@@ -25,6 +24,4 @@ const ImagesGrid: React.FC = () => {
       ))}
     </Masonry>
   );
-};
-
-export default ImagesGrid;
+}

@@ -6,8 +6,7 @@ import {
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { ThemeProvider } from "@material-ui/styles";
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import ImageProvider from "./context/ImageContext";
 import ImageDetails from "./pages/ImageDetails";
@@ -32,14 +31,12 @@ const App: React.FC = () => {
         <CssBaseline />
         <Router>
           <Header />
-          <Switch>
-            <>
-              <Container maxWidth="lg" className={classes.root}>
-                <Route exact path="/" component={Main} />
-                <Route path="/image/:id" component={ImageDetails} />
-              </Container>
-            </>
-          </Switch>
+          <Container maxWidth="lg" className={classes.root}>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/image/:id" element={<ImageDetails />} />
+            </Routes>
+          </Container>
         </Router>
       </ImageProvider>
     </ThemeProvider>

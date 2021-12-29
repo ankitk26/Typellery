@@ -1,17 +1,12 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import ImagesGrid from "../components/ImagesGrid";
 import PagePagination from "../components/PagePagination";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 
-const Main: React.FC = () => {
-  const {
-    totalPages,
-    fetchImages,
-    currentPage,
-    loading,
-    fetchSearchResults,
-  } = useContext(ImageContext) as ImageContextInterface;
+export default function Main() {
+  const { totalPages, fetchImages, currentPage, loading, fetchSearchResults } =
+    useImage();
 
   useEffect(() => {
     if (totalPages === 0) {
@@ -34,6 +29,4 @@ const Main: React.FC = () => {
       )}
     </>
   );
-};
-
-export default Main;
+}

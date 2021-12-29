@@ -8,9 +8,8 @@ import {
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,10 +39,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ImageStats: React.FC = () => {
+export default function ImageStats() {
   const classes = useStyles();
 
-  const { current } = useContext(ImageContext) as ImageContextInterface;
+  const { current } = useImage();
 
   return (
     <Paper className={classes.statsContainer} variant="outlined">
@@ -71,6 +70,4 @@ const ImageStats: React.FC = () => {
       </Link>
     </Paper>
   );
-};
-
-export default ImageStats;
+}

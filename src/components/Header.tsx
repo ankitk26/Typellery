@@ -1,7 +1,7 @@
 import {
+  alpha,
   AppBar,
   createStyles,
-  fade,
   IconButton,
   makeStyles,
   Theme,
@@ -10,8 +10,7 @@ import {
 } from "@material-ui/core";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchForm from "./SearchForm";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,9 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
       },
       marginLeft: 0,
       width: "100%",
@@ -56,10 +55,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Header: React.FC = () => {
+export default function Header() {
   const classes = useStyles();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <AppBar position="static">
@@ -69,7 +68,7 @@ const Header: React.FC = () => {
           className={classes.homeButton}
           color="inherit"
           aria-label="open drawer"
-          onClick={() => history.push("/")}
+          onClick={() => navigate("/")}
         >
           <HomeRoundedIcon />
         </IconButton>
@@ -85,6 +84,4 @@ const Header: React.FC = () => {
       </Toolbar>
     </AppBar>
   );
-};
-
-export default Header;
+}

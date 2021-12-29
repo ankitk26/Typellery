@@ -6,10 +6,9 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import React from "react";
 import { Link } from "react-router-dom";
 
-interface ImageItemProps {
+interface IProps {
   image: Image;
 }
 
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ImageItem: React.FC<ImageItemProps> = ({ image }) => {
+export default function ImageItem({ image }: IProps) {
   const classes = useStyles();
 
   return (
@@ -53,6 +52,4 @@ const ImageItem: React.FC<ImageItemProps> = ({ image }) => {
       </Paper>
     </Link>
   );
-};
-
-export default ImageItem;
+}

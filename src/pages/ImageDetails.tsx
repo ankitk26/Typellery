@@ -1,19 +1,20 @@
 import { Box, Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import React, { useContext, useEffect } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ImageInfoHeader from "../components/ImageInfoHeader";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 
-const ImageDetails: React.FC<RouteComponentProps<any>> = (props) => {
-  const id = props.match.params.id;
+export default function ImageDetails() {
+  const params = useParams();
+  const id = params.id;
 
-  const { current, loading, clearCurrent, fetchImageById } = useContext(
-    ImageContext
-  ) as ImageContextInterface;
+  const { current, loading, clearCurrent, fetchImageById } = useImage();
 
   useEffect(() => {
-    fetchImageById(id);
+    if (id) {
+      fetchImageById(id);
+    }
 
     return () => {
       clearCurrent();
@@ -34,6 +35,4 @@ const ImageDetails: React.FC<RouteComponentProps<any>> = (props) => {
       <Typography>{current?.description}</Typography>
     </Box>
   );
-};
-
-export default ImageDetails;
+}

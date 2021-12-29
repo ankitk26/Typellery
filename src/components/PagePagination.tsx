@@ -1,7 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
-import React, { useContext } from "react";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,12 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PagePagination: React.FC = () => {
+export default function PagePagination() {
   const classes = useStyles();
 
-  const { currentPage, totalPages, setCurrentPage } = useContext(
-    ImageContext
-  ) as ImageContextInterface;
+  const { currentPage, totalPages, setCurrentPage } = useImage();
 
   const handlePagination = (e: React.ChangeEvent<unknown>, page: number) => {
     console.log(page);
@@ -41,6 +38,4 @@ const PagePagination: React.FC = () => {
       />
     </div>
   );
-};
-
-export default PagePagination;
+}

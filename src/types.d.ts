@@ -22,20 +22,4 @@ type Image = {
   };
 };
 
-type Images = Array<Image>;
-
-interface ImageContextInterface {
-  images: Images;
-  itemsPerPage: number;
-  currentPage: number;
-  loading: boolean;
-  search: string;
-  totalPages: number;
-  current: Image | null;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
-  fetchImages: () => void;
-  fetchSearchResults: () => void;
-  fetchImageById: (id: string) => void;
-  clearCurrent: () => void;
-}
+type Images = Image[];

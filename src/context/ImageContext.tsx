@@ -1,9 +1,25 @@
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const ImageContext = createContext<ImageContextInterface | null>(null);
+interface ContextProps {
+  images: Images;
+  itemsPerPage: number;
+  currentPage: number;
+  loading: boolean;
+  search: string;
+  totalPages: number;
+  current: Image | null;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  fetchImages: () => void;
+  fetchSearchResults: () => void;
+  fetchImageById: (id: string) => void;
+  clearCurrent: () => void;
+}
 
-const ImageProvider: React.FC<React.ReactNode> = ({ children }) => {
+const ImageContext = createContext({} as ContextProps);
+
+export default function ImageProvider({ children }: any) {
   const [images, setImages] = useState<Images>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -14,14 +30,14 @@ const ImageProvider: React.FC<React.ReactNode> = ({ children }) => {
   const itemsPerPage: number = 20;
   const config = {
     headers: {
-      Authorization: `Client-ID ${process.env.REACT_APP_API_KEY}`,
+      Authorization: `Client-ID ${process.env.REACT_APP_ACCESS_KEY}`,
     },
   };
   const BASE_URL = "https://api.unsplash.com";
 
   const fetchImages = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const res = await axios.get(
         `${BASE_URL}/photos?per_page=${itemsPerPage}&page=${currentPage}`,
         config
@@ -29,13 +45,16 @@ const ImageProvider: React.FC<React.ReactNode> = ({ children }) => {
       setImages(res.data);
       setLoading(false);
     } catch (err) {
-      console.log(err.message);
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
+      setLoading(false);
     }
   };
 
   const fetchSearchResults = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const res = await axios.get(
         `${BASE_URL}/search/photos?query=${search}&per_page=${itemsPerPage}&page=${currentPage}`,
         config
@@ -44,18 +63,24 @@ const ImageProvider: React.FC<React.ReactNode> = ({ children }) => {
       setTotalPages(res.data.total_pages);
       setLoading(false);
     } catch (err) {
-      console.log(err.message);
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
+      setLoading(false);
     }
   };
 
   const fetchImageById = async (id: string) => {
+    setLoading(true);
     try {
-      setLoading(true);
       const res = await axios.get(`${BASE_URL}/photos/${id}`, config);
       setCurrent(res.data);
       setLoading(false);
     } catch (err) {
-      console.log(err.message);
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
+      setLoading(false);
     }
   };
 
@@ -84,6 +109,6 @@ const ImageProvider: React.FC<React.ReactNode> = ({ children }) => {
       {children}
     </ImageContext.Provider>
   );
-};
+}
 
-export default ImageProvider;
+export const useImage = () => useContext(ImageContext);

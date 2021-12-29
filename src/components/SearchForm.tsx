@@ -1,6 +1,5 @@
 import { createStyles, InputBase, makeStyles, Theme } from "@material-ui/core";
-import React, { useContext } from "react";
-import { ImageContext } from "../context/ImageContext";
+import { useImage } from "../context/ImageContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,11 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SearchForm: React.FC = () => {
+export default function SearchForm() {
   const classes = useStyles();
-  const { fetchSearchResults, setSearch, search } = useContext(
-    ImageContext
-  ) as ImageContextInterface;
+  const { fetchSearchResults, setSearch, search } = useImage();
 
   const handleSearch = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -54,6 +51,4 @@ const SearchForm: React.FC = () => {
       />
     </form>
   );
-};
-
-export default SearchForm;
+}
