@@ -1,4 +1,4 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import ImagesGrid from "../components/ImagesGrid";
 import PagePagination from "../components/PagePagination";
@@ -10,23 +10,24 @@ export default function Main() {
 
   useEffect(() => {
     if (totalPages === 0) {
-      return fetchImages();
+      fetchImages();
+      return;
     }
     fetchSearchResults();
     // eslint-disable-next-line
   }, [currentPage, totalPages]);
 
   return (
-    <>
+    <Box>
       <PagePagination />
       {loading ? (
-        <CircularProgress />
+        <Spinner size="md" />
       ) : (
         <>
           <ImagesGrid />
           <PagePagination />
         </>
       )}
-    </>
+    </Box>
   );
 }

@@ -42,12 +42,12 @@ export default function ImageProvider({ children }: any) {
         `${BASE_URL}/photos?per_page=${itemsPerPage}&page=${currentPage}`,
         config
       );
-      setImages(res.data);
+      const data = res.data;
+      setImages(data);
       setLoading(false);
     } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
-      }
+      console.log(err);
+
       setLoading(false);
     }
   };

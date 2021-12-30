@@ -17,7 +17,7 @@ export default function ImagesGrid() {
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {images.map((image: Image) => (
+      {images.map((image) => (
         <div key={image.id}>
           <ImageItem image={image} />
         </div>

@@ -1,46 +1,25 @@
-import {
-  createStyles,
-  CssBaseline,
-  makeStyles,
-  Theme,
-} from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import { ThemeProvider } from "@material-ui/styles";
+import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import ImageProvider from "./context/ImageContext";
 import ImageDetails from "./pages/ImageDetails";
 import Main from "./pages/Main";
-import theme from "./theme";
+import { theme } from "./theme";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      textAlign: "center",
-      marginTop: theme.spacing(4),
-    },
-  })
-);
-
-const App: React.FC = () => {
-  const classes = useStyles();
-
+export default function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ChakraProvider theme={theme}>
       <ImageProvider>
-        <CssBaseline />
         <Router>
           <Header />
-          <Container maxWidth="lg" className={classes.root}>
+          <Box w="80%" mx="auto" textAlign="center" marginTop={8}>
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/image/:id" element={<ImageDetails />} />
             </Routes>
-          </Container>
+          </Box>
         </Router>
       </ImageProvider>
-    </ThemeProvider>
+    </ChakraProvider>
   );
-};
-
-export default App;
+}

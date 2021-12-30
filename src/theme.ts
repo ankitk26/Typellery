@@ -1,15 +1,8 @@
-import { createMuiTheme } from "@material-ui/core";
-import { teal } from "@material-ui/core/colors";
+import { extendTheme } from "@chakra-ui/react";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: teal[700],
-    },
-  },
-  typography: {
-    fontFamily: "Nunito",
+export const theme = extendTheme({
+  fonts: {
+    heading: "Nunito",
+    body: "Nunito",
   },
 });
-
-export default theme;

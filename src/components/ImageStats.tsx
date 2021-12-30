@@ -1,73 +1,44 @@
-import {
-  createStyles,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import VisibilityIcon from "@material-ui/icons/Visibility";
+import { Flex, Icon, Stack, Text } from "@chakra-ui/react";
+import { DownloadIcon, EyeIcon, HeartIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { useImage } from "../context/ImageContext";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    statsContainer: {
-      gap: "16px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      [theme.breakpoints.down("md")]: {
-        marginBottom: theme.spacing(4),
-      },
-    },
-    stats: {
-      padding: theme.spacing(1),
-      display: "flex",
-      gap: "5px",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    downloadLink: {
-      backgroundColor: theme.palette.primary.light,
-      "& > *": {
-        color: theme.palette.common.white,
-      },
-    },
-  })
-);
-
 export default function ImageStats() {
-  const classes = useStyles();
-
   const { current } = useImage();
 
   return (
-    <Paper className={classes.statsContainer} variant="outlined">
-      <div className={classes.stats}>
-        <FavoriteIcon color="primary" />
-        <Typography color="primary" variant="body2">
+    <Flex
+      border="1px"
+      rounded="md"
+      borderColor="gray.300"
+      alignItems="center"
+      justifyContent="center"
+      gap={4}
+      px={8}
+      mb={{ base: 8, md: 0 }}
+    >
+      <Stack alignItems="center" justifyContent="center" p={2}>
+        <Icon as={HeartIcon} color="teal.600" fontSize="xl" />
+        <Text color="teal.600" fontSize="md">
           {current?.likes}
-        </Typography>
-      </div>
+        </Text>
+      </Stack>
 
-      <div className={classes.stats}>
-        <VisibilityIcon color="primary" />
-        <Typography color="primary" variant="body2">
+      <Stack alignItems="center" justifyContent="center" p={2}>
+        <Icon as={EyeIcon} color="teal.600" fontSize="xl" />
+        <Text color="teal.600" fontSize="md">
           {current?.views}
-        </Typography>
-      </div>
+        </Text>
+      </Stack>
 
       <Link to={{ pathname: current?.links.download }} target="_blank">
-        <div className={`${classes.stats} ${classes.downloadLink}`}>
-          <GetAppIcon color="primary" />
-          <Typography color="primary" variant="body2">
+        <Stack alignItems="center" justifyContent="center" p={2}>
+          <Icon as={DownloadIcon} color="teal.600" fontSize="xl" />
+          <Text color="teal.600" fontSize="md">
             {current?.downloads}
-          </Typography>
-        </div>
+          </Text>
+        </Stack>
       </Link>
-    </Paper>
+    </Flex>
   );
 }

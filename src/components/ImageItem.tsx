@@ -1,55 +1,28 @@
-import {
-  Avatar,
-  createStyles,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 interface IProps {
   image: Image;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      padding: theme.spacing(1),
-    },
-    image: {
-      maxWidth: "100%",
-      objectFit: "contain",
-    },
-    userInfo: {
-      alignItems: "center",
-      justifyContent: "center",
-      padding: theme.spacing(1),
-      gap: theme.spacing(1),
-      display: "flex",
-    },
-  })
-);
-
 export default function ImageItem({ image }: IProps) {
-  const classes = useStyles();
-
   return (
     <Link to={`/image/${image.id}`}>
-      <Paper className={classes.root} variant="outlined">
-        <img
+      <Box p={2} border="1px" borderColor="gray.200" rounded="md">
+        <Image
           src={image.urls.small}
           alt={`item-${image.id}`}
-          className={classes.image}
+          maxWidth="100%"
+          objectFit="contain"
         />
-        <div className={classes.userInfo}>
+        <Flex alignItems="center" justifyContent="center" p={2} gap={2}>
           <Avatar
             src={image.user.profile_image.large}
             alt={image.user.username}
           />
-          <Typography variant="subtitle1">{image.user.name}</Typography>
-        </div>
-      </Paper>
+          <Text fontSize="md">{image.user.name}</Text>
+        </Flex>
+      </Box>
     </Link>
   );
 }
