@@ -20,14 +20,14 @@ export default function ImageStats() {
       <Stack alignItems="center" justifyContent="center" p={2}>
         <Icon as={HeartIcon} color="teal.600" fontSize="xl" />
         <Text color="teal.600" fontSize="md">
-          {current?.likes}
+          {current?.likes.toLocaleString()}
         </Text>
       </Stack>
 
       <Stack alignItems="center" justifyContent="center" p={2}>
         <Icon as={EyeIcon} color="teal.600" fontSize="xl" />
         <Text color="teal.600" fontSize="md">
-          {current?.views}
+          {current?.views?.toLocaleString()}
         </Text>
       </Stack>
 
@@ -35,7 +35,7 @@ export default function ImageStats() {
         <Stack alignItems="center" justifyContent="center" p={2}>
           <Icon as={DownloadIcon} color="teal.600" fontSize="xl" />
           <Text color="teal.600" fontSize="md">
-            {current?.downloads}
+            {current?.downloads?.toLocaleString()}
           </Text>
         </Stack>
       </Link>
